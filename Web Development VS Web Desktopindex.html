@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App vs Desktop App: Complete Architecture & Freelance Selling Guide</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        web: {
+                            light: '#3b82f6',
+                            DEFAULT: '#2563eb',
+                            dark: '#1d4ed8',
+                        },
+                        desktop: {
+                            light: '#a855f7',
+                            DEFAULT: '#9333ea',
+                            dark: '#7e22ce',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- Toast Notification Container (Replaces alert()) -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Sticky Glassmorphism Navigation -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                </div>
+                <span class="font-heading font-bold text-lg tracking-tight">App<span class="text-blue-600 dark:text-blue-400">Arch</span>Guide</span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="#comparison" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Comparison</a>
+                <a href="#pros-cons" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Pros & Cons</a>
+                <a href="#features" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Features</a>
+                <a href="#tech-stack" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Tech Stack</a>
+                <a href="#freelance-strategy" class="hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-semibold">Freelance Selling</a>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Copy Complete HTML Code Button -->
+                <button id="copy-html-btn" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 transition-all shadow-sm active:scale-95" title="Copy complete HTML source code">
+                    <i data-lucide="code-2" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Copy HTML Code</span>
+                    <span class="sm:hidden">Copy Code</span>
+                </button>
+
+                <!-- Dark/Light Theme Toggle -->
+                <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors" aria-label="Toggle Dark Mode">
+                    <i data-lucide="sun" id="sun-icon" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+                    <i data-lucide="moon" id="moon-icon" class="w-5 h-5 block dark:hidden text-slate-700"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION -->
+    <section class="relative overflow-hidden pt-14 pb-20 sm:pt-20 sm:pb-28 border-b border-slate-200 dark:border-slate-800">
+        <!-- Decorative Background Blobs -->
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/15 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/15 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800 mb-6">
+                <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+                Architecture & Freelance Monetization Blueprint
+            </div>
+
+            <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-4xl mx-auto leading-tight">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Web Application</span>
+                <span class="mx-2 text-slate-400 dark:text-slate-600 font-light">vs</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Desktop Application</span>
+            </h1>
+
+            <p class="mt-6 text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                A complete technical and business breakdown comparing cloud-hosted browser software against native OS executables—plus actionable strategies to price and sell both online as a freelancer.
+            </p>
+
+            <!-- Quick Interactive Jump / Filter Pills -->
+            <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+                <a href="#comparison" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/25 transition-all hover:-translate-y-0.5">
+                    <i data-lucide="table-2" class="w-4 h-4"></i>
+                    Comparison Matrix
+                </a>
+                <a href="#pros-cons" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 shadow-sm transition-all hover:-translate-y-0.5">
+                    <i data-lucide="scale" class="w-4 h-4 text-blue-500"></i>
+                    Pros & Cons
+                </a>
+                <a href="#tech-stack" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-purple-400 dark:hover:border-purple-500 shadow-sm transition-all hover:-translate-y-0.5">
+                    <i data-lucide="cpu" class="w-4 h-4 text-purple-500"></i>
+                    Tech Stacks
+                </a>
+                <a href="#freelance-strategy" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-lg shadow-purple-500/25 transition-all hover:-translate-y-0.5">
+                    <i data-lucide="briefcase" class="w-4 h-4"></i>
+                    Freelancer Selling Guide
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. SIDE-BY-SIDE COMPARISON TABLE -->
+    <section id="comparison" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Head-to-Head Matrix</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-1">Core Architectural Comparison</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm sm:text-base">Filter or search specific criteria to evaluate which architecture fits your project.</p>
+            </div>
+            
+            <!-- Interactive Table Filter -->
+            <div class="relative w-full md:w-72">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="table-search" placeholder="Filter criteria (e.g., Security, Cost)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+            </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+            <table class="w-full text-left border-collapse" id="comparison-table">
+                <thead>
+                    <tr class="bg-slate-100/80 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 text-xs uppercase tracking-wider font-semibold">
+                        <th class="py-4 px-5 text-slate-600 dark:text-slate-300 w-1/5">Criteria</th>
+                        <th class="py-4 px-5 text-blue-600 dark:text-blue-400 w-2/5">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="globe" class="w-4 h-4"></i> Web Application
+                            </div>
+                        </th>
+                        <th class="py-4 px-5 text-purple-600 dark:text-purple-400 w-2/5">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="monitor" class="w-4 h-4"></i> Desktop Application
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-800 text-sm">
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                        <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">Accessibility</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Accessible from anywhere on any device (Windows, Mac, Linux, Mobile) via a browser and internet URL.</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Restricted to the specific computer and OS where the executable binary is installed.</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                        <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">Installation</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300"><span class="inline-block px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-xs font-medium mr-1">Zero Install</span> Runs instantly in browser; optional PWA shortcut.</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300"><span class="inline-block px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 text-xs font-medium mr-1">Required</span> Must download installer (.exe, .dmg, .AppImage) and configure locally.</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                        <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">Performance</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Constrained by browser sandbox, network latency, and JavaScript single-thread limits (mitigated by WebAssembly).</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300"><span class="inline-block px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300 text-xs font-medium mr-1">Native Speed</span> Direct CPU, GPU, and RAM access for heavy rendering, video, or local AI.</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                        <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">Offline Support</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Requires active internet connection (limited offline caching available via Service Workers & IndexedDB).</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Works 100% offline out-of-the-box using local file systems and embedded databases (SQLite).</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                        <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">Updates</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Instant, centralized server deployments. Every user gets the latest version on page refresh.</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Requires user action to download patches or building custom auto-updater pipelines.</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                        <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">Security</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Exposed to web attack vectors (XSS, CSRF, DDoS); relies on HTTPS, WAF, and centralized cloud compliance.</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Data stays locally on user's machine (high privacy), though binaries can be reverse-engineered if unprotected.</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                        <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">Hardware Access</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Sandboxed; limited access to USB, serial ports, local printers, or background OS hooks.</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Full unrestricted access to peripherals, biometric scanners, POS hardware, and system registry.</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                        <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">Cost Structure</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Single codebase for all OSs, but incurs ongoing monthly cloud hosting, database, and bandwidth costs.</td>
+                        <td class="py-4 px-5 text-slate-600 dark:text-slate-300">Higher upfront cost if targeting multiple OSs natively, but near-zero ongoing server/hosting overhead.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 3. ADVANTAGES & DISADVANTAGES (INTERACTIVE TABS + SIDE-BY-SIDE VIEW) -->
+    <section id="pros-cons" class="py-16 sm:py-24 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">Trade-offs & Strengths</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-1">Advantages & Disadvantages</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm sm:text-base">Switch between Web and Desktop views or inspect both architectures side-by-side.</p>
+
+                <!-- Interactive View Switcher Tabs -->
+                <div class="inline-flex p-1.5 rounded-2xl bg-slate-200/80 dark:bg-slate-800 mt-6">
+                    <button data-tab="both" class="pros-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm transition-all">
+                        Side-by-Side View
+                    </button>
+                    <button data-tab="web" class="pros-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                        Web App Focus
+                    </button>
+                    <button data-tab="desktop" class="pros-tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                        Desktop App Focus
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cards Container -->
+            <div id="pros-cons-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- WEB APPLICATION PROS & CONS -->
+                <div id="web-pros-card" class="rounded-3xl bg-white dark:bg-slate-900 border border-blue-200/80 dark:border-blue-900/50 p-6 sm:p-8 shadow-sm transition-all">
+                    <div class="flex items-center gap-3 pb-5 border-b border-slate-100 dark:border-slate-800">
+                        <div class="w-11 h-11 rounded-2xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                            <i data-lucide="globe" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white">Web Applications</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Cloud-delivered, browser-executed software</p>
+                        </div>
+                    </div>
+
+                    <!-- Advantages -->
+                    <div class="mt-6">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 mb-3">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i> Key Advantages
+                        </h4>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0"></span>
+                                <span><strong>Cross-Platform Universality:</strong> Write once, run on Windows, macOS, Linux, iOS, and Android browsers.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0"></span>
+                                <span><strong>Frictionless Onboarding:</strong> Users click a link and sign up—no installer downloads or OS security warnings.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0"></span>
+                                <span><strong>Real-Time Collaboration:</strong> Built-in multi-user sync, shared dashboards, and cloud webhooks.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0"></span>
+                                <span><strong>Anti-Piracy Protection:</strong> Core backend logic stays on your server, preventing code theft.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Disadvantages -->
+                    <div class="mt-7 pt-6 border-t border-slate-100 dark:border-slate-800">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 flex items-center gap-1.5 mb-3">
+                            <i data-lucide="x-circle" class="w-4 h-4"></i> Key Disadvantages
+                        </h4>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                                <span><strong>Internet Dependency:</strong> Unusable or severely degraded when offline or on unstable networks.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                                <span><strong>Recurring Server Costs:</strong> Monthly bills for AWS/Vercel, managed databases, and bandwidth scale with users.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                                <span><strong>Browser Sandbox Limits:</strong> Restricted access to local file systems, serial ports, and raw GPU threads.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- DESKTOP APPLICATION PROS & CONS -->
+                <div id="desktop-pros-card" class="rounded-3xl bg-white dark:bg-slate-900 border border-purple-200/80 dark:border-purple-900/50 p-6 sm:p-8 shadow-sm transition-all">
+                    <div class="flex items-center gap-3 pb-5 border-b border-slate-100 dark:border-slate-800">
+                        <div class="w-11 h-11 rounded-2xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+                            <i data-lucide="monitor" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white">Desktop Applications</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Locally installed, OS-native software</p>
+                        </div>
+                    </div>
+
+                    <!-- Advantages -->
+                    <div class="mt-6">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 mb-3">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i> Key Advantages
+                        </h4>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0"></span>
+                                <span><strong>Maximum Hardware Performance:</strong> Full multi-core CPU, GPU acceleration, and large RAM allocation.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0"></span>
+                                <span><strong>100% Offline Reliability:</strong> Ideal for retail POS, clinics, factories, and remote field operations.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0"></span>
+                                <span><strong>Deep OS & Peripheral Integration:</strong> Seamless control over thermal printers, barcode scanners, and system trays.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2 shrink-0"></span>
+                                <span><strong>Zero Hosting Overhead:</strong> Computation runs on the client's hardware, saving you cloud server costs.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Disadvantages -->
+                    <div class="mt-7 pt-6 border-t border-slate-100 dark:border-slate-800">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 flex items-center gap-1.5 mb-3">
+                            <i data-lucide="x-circle" class="w-4 h-4"></i> Key Disadvantages
+                        </h4>
+                        <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                                <span><strong>OS Fragmentation:</strong> Separate builds and code-signing certificates needed for Windows, macOS, and Linux.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                                <span><strong>Distribution & Update Friction:</strong> Windows SmartScreen/macOS Gatekeeper warnings can scare non-tech users.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></span>
+                                <span><strong>Data Silos:</strong> Local databases require extra engineering to sync data across multiple branches.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. KEY FEATURES BREAKDOWN -->
+    <section id="features" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">Core Capabilities</span>
+            <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-1">Architectural Features Breakdown</h2>
+            <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm sm:text-base">Distinct technical capabilities that define modern web and desktop ecosystems.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Web App Features -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-heading font-bold text-lg mb-2">
+                    <i data-lucide="cloud" class="w-5 h-5"></i> Web Application Features
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400"><i data-lucide="smartphone" class="w-4 h-4"></i></div>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">Responsive & Progressive (PWA)</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Adapts seamlessly from 4K desktop monitors to mobile screens, with push notifications and home-screen installability.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400"><i data-lucide="users" class="w-4 h-4"></i></div>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">Multi-Tenant SaaS & RBAC</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Role-Based Access Control (Admin, Manager, Staff) with isolated organization workspaces and OAuth/SSO login.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-blue-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400"><i data-lucide="webhook" class="w-4 h-4"></i></div>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">REST / GraphQL API & Webhooks</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Effortless integration with Stripe billing, Twilio SMS, AI APIs, and third-party CRMs.</p>
+                </div>
+            </div>
+
+            <!-- Desktop App Features -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-2 text-purple-600 dark:text-purple-400 font-heading font-bold text-lg mb-2">
+                    <i data-lucide="hard-drive" class="w-5 h-5"></i> Desktop Application Features
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400"><i data-lucide="cpu" class="w-4 h-4"></i></div>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">Multi-Threading & GPU Compute</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Direct access to native threads, DirectX/Metal/Vulkan graphics, and local LLM/AI inference without cloud latency.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400"><i data-lucide="printer" class="w-4 h-4"></i></div>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">Direct Hardware & File System I/O</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Instant ESC/POS receipt printing, serial COM port communication, background daemons, and global keyboard shortcuts.</p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-600 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="p-2 rounded-lg bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-400"><i data-lucide="database" class="w-4 h-4"></i></div>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">Embedded Local Storage & Encryption</h4>
+                    </div>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Zero-latency local SQLite/DuckDB databases with hardware-bound license keys and encrypted local backups.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. MODERN TECH STACK / TECHNOLOGIES -->
+    <section id="tech-stack" class="py-16 sm:py-24 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Developer Ecosystem</span>
+                <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-1">Modern Tech Stacks & Frameworks</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm sm:text-base">Industry-standard languages, frameworks, and databases used to build production apps today.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Web Tech Stack Card -->
+                <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-heading text-xl font-bold text-blue-600 dark:text-blue-400 flex items-center gap-2">
+                            <i data-lucide="code" class="w-5 h-5"></i> Web Application Stack
+                        </h3>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-300">Cloud & Browser</span>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">Frontend & UI</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-800">React.js</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700">Next.js (App Router)</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800">Vue / Nuxt</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-800">Tailwind CSS</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800">TypeScript</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">Backend & APIs</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-green-50 text-green-700 border border-green-200 dark:bg-green-950/60 dark:text-green-300 dark:border-green-800">Node.js / Express</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800">Python / Django / FastAPI</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800">Laravel (PHP)</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200 dark:bg-indigo-950/60 dark:text-indigo-300 dark:border-indigo-800">ASP.NET Core</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">Cloud Databases & Hosting</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">PostgreSQL</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">MongoDB</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">Supabase / Firebase</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">AWS / Vercel / Docker</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Tech Stack Card -->
+                <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-heading text-xl font-bold text-purple-600 dark:text-purple-400 flex items-center gap-2">
+                            <i data-lucide="terminal" class="w-5 h-5"></i> Desktop Application Stack
+                        </h3>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-purple-50 dark:bg-purple-950 text-purple-600 dark:text-purple-300">Native & Cross-OS</span>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">Windows & Enterprise Native</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800">C# / .NET 8 (WPF & WinUI 3)</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-violet-50 text-violet-700 border border-violet-200 dark:bg-violet-950/60 dark:text-violet-300 dark:border-violet-800">WinForms (Rapid POS/ERP)</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800">.NET MAUI</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">Modern Cross-Platform Hybrid</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-800">Electron.js (VS Code, Discord)</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-orange-50 text-orange-700 border border-orange-200 dark:bg-orange-950/60 dark:text-orange-300 dark:border-orange-800">Tauri (Rust + Web UI, Tiny Binary)</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-800">Flutter Desktop</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">High-Performance Systems & Local DB</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">C++ / Qt Framework</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">Rust</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">Python (PyQt6 / CustomTkinter)</span>
+                                <span class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">SQLite / SQL Server Express</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FREELANCER ONLINE SELLING STRATEGY SECTION -->
+    <section id="freelance-strategy" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-14">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 mb-3">
+                <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Monetization Blueprint
+            </span>
+            <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Freelancer Online Selling Strategy</h2>
+            <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm sm:text-base">How to package, price, and sell Web & Desktop applications online—whether doing custom client work or selling ready-made digital products.</p>
+        </div>
+
+        <!-- Strategy Cards Grid: Pricing Models, Marketplaces, Pitch Tips -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-14">
+            
+            <!-- Column 1: Pricing & Monetization Models -->
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5">
+                        <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white mb-4">1. Winning Pricing Models</h3>
+                    
+                    <div class="space-y-4 text-sm">
+                        <div class="p-3.5 rounded-2xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-900/50">
+                            <p class="font-bold text-blue-700 dark:text-blue-300 mb-1">Web Apps: SaaS + Retainer</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">Charge <strong>$800–$5,000+</strong> upfront for custom builds, plus <strong>$50–$200/mo</strong> for cloud hosting, backups, and maintenance—or launch as a multi-tenant SaaS ($19–$99/mo per user).</p>
+                        </div>
+
+                        <div class="p-3.5 rounded-2xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/50">
+                            <p class="font-bold text-purple-700 dark:text-purple-300 mb-1">Desktop Apps: License + Per-PC</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">Businesses hate monthly subscriptions for offline tools. Sell <strong>One-Time Lifetime Licenses ($49–$299/PC)</strong> with optional annual update renewals (20%/yr).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-500"></i> Pro Tip: Bundle installation + training for +30% margin.
+                </div>
+            </div>
+
+            <!-- Column 2: Best Online Selling Platforms -->
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-11 h-11 rounded-2xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-5">
+                        <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white mb-4">2. Where to Sell Online</h3>
+                    
+                    <ul class="space-y-3.5 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-start gap-2.5">
+                            <span class="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-xs font-bold shrink-0 mt-0.5">Services</span>
+                            <span><strong>Upwork & Fiverr Pro:</strong> Productize gigs like <em>"I will build a custom C# POS Desktop Software"</em> or <em>"Next.js SaaS MVP in 14 days"</em>.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 text-xs font-bold shrink-0 mt-0.5">Binaries</span>
+                            <span><strong>Gumroad & Lemon Squeezy:</strong> Sell compiled Desktop utilities, automation bots, and SaaS boilerplates with built-in license key generation.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <span class="px-2 py-0.5 rounded bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 text-xs font-bold shrink-0 mt-0.5">Source</span>
+                            <span><strong>CodeCanyon (Envato) & Codester:</strong> Sell full source code (PHP/Laravel scripts, .NET POS templates) for passive recurring royalties.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                    <i data-lucide="globe-2" class="w-4 h-4 text-blue-500"></i> Lemon Squeezy acts as Merchant of Record (handles global tax).
+                </div>
+            </div>
+
+            <!-- Column 3: High-Converting Client Pitch Tips -->
+            <div class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="w-11 h-11 rounded-2xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-5">
+                        <i data-lucide="message-square-quote" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white mb-4">3. Client Pitch Playbook</h3>
+                    
+                    <ul class="space-y-3.5 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-1"></i>
+                            <span><strong>Sell Business ROI, Not Code:</strong> Don't pitch "React + PostgreSQL". Pitch <em>"Save 12 hours/week of manual inventory errors"</em>.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-1"></i>
+                            <span><strong>Offer Interactive Demos:</strong> Host a live sandbox URL for Web Apps, or record a 90-second Loom video walkthrough for Desktop Apps.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="check" class="w-4 h-4 text-emerald-500 shrink-0 mt-1"></i>
+                            <span><strong>Recommend the Right Fit:</strong> Pitch Desktop for retail shops with poor internet; pitch Web for multi-branch remote teams.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i> Always include a 30-day bug-free warranty to build trust.
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERACTIVE FREELANCER ROI & PRICING ESTIMATOR + LAUNCH CHECKLIST -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            <!-- Interactive ROI & Revenue Calculator (7 Cols) -->
+            <div class="lg:col-span-7 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 text-white p-6 sm:p-8 shadow-xl border border-slate-800">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Interactive Simulator</span>
+                        <h3 class="font-heading text-2xl font-bold mt-0.5">Freelance Revenue & ROI Estimator</h3>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-cyan-300 border border-white/10">12-Month Projection</span>
+                </div>
+
+                <!-- Model Selector -->
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <button type="button" id="calc-mode-web" class="calc-mode-btn p-3.5 rounded-2xl border border-blue-500 bg-blue-600/20 text-left transition-all">
+                        <div class="flex items-center gap-2 font-semibold text-sm text-blue-300">
+                            <i data-lucide="globe" class="w-4 h-4"></i> Web SaaS / Retainer
+                        </div>
+                        <p class="text-xs text-slate-300 mt-1">Monthly recurring subscriptions</p>
+                    </button>
+                    <button type="button" id="calc-mode-desktop" class="calc-mode-btn p-3.5 rounded-2xl border border-slate-700 bg-slate-800/50 text-left hover:border-purple-500 transition-all">
+                        <div class="flex items-center gap-2 font-semibold text-sm text-purple-300">
+                            <i data-lucide="monitor" class="w-4 h-4"></i> Desktop License Sales
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">One-time licenses + annual support</p>
+                    </button>
+                </div>
+
+                <!-- Sliders -->
+                <div class="space-y-5">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5">
+                            <label for="clients-slider" id="clients-label" class="text-slate-300 font-medium">Active Paying Clients / Subscribers</label>
+                            <span id="clients-val" class="font-bold text-cyan-400">25 clients</span>
+                        </div>
+                        <input type="range" id="clients-slider" min="5" max="200" step="5" value="25" class="w-full accent-blue-500 cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5">
+                            <label for="price-slider" id="price-label" class="text-slate-300 font-medium">Monthly Subscription Price ($)</label>
+                            <span id="price-val" class="font-bold text-cyan-400">$49 / mo</span>
+                        </div>
+                        <input type="range" id="price-slider" min="15" max="500" step="5" value="49" class="w-full accent-blue-500 cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-1.5">
+                            <label for="cost-slider" id="cost-label" class="text-slate-300 font-medium">Monthly Cloud / Marketing Overhead ($)</label>
+                            <span id="cost-val" class="font-bold text-rose-400">$60 / mo</span>
+                        </div>
+                        <input type="range" id="cost-slider" min="0" max="500" step="10" value="60" class="w-full accent-rose-500 cursor-pointer">
+                    </div>
+                </div>
+
+                <!-- Output Metrics Box -->
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-800">
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <p class="text-xs text-slate-400" id="metric-1-title">Monthly Net Profit</p>
+                        <p class="font-heading text-2xl font-extrabold text-emerald-400 mt-1" id="metric-1-val">$1,165</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <p class="text-xs text-slate-400">Estimated Year-1 Net</p>
+                        <p class="font-heading text-2xl font-extrabold text-white mt-1" id="metric-2-val">$13,980</p>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <p class="text-xs text-slate-400">Profit Margin</p>
+                        <p class="font-heading text-2xl font-extrabold text-cyan-400 mt-1" id="metric-3-val">95%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Freelance Launch Checklist (5 Cols) -->
+            <div class="lg:col-span-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white">Pre-Launch Readiness</h3>
+                        <span id="checklist-progress" class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">2 / 5 Done</span>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-5">Track your steps before listing your app on Fiverr, Upwork, or Gumroad.</p>
+
+                    <div class="space-y-3" id="launch-checklist">
+                        <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors">
+                            <input type="checkbox" checked class="checklist-item w-4 h-4 rounded text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm text-slate-700 dark:text-slate-200">Record a 90-second HD demo video</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors">
+                            <input type="checkbox" checked class="checklist-item w-4 h-4 rounded text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm text-slate-700 dark:text-slate-200">Set up Stripe / Lemon Squeezy license keys</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="checklist-item w-4 h-4 rounded text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm text-slate-700 dark:text-slate-200">Create clean PDF user manual & setup docs</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="checklist-item w-4 h-4 rounded text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm text-slate-700 dark:text-slate-200">Configure SSL (Web) or Code Signing (Desktop)</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors">
+                            <input type="checkbox" class="checklist-item w-4 h-4 rounded text-blue-600 focus:ring-blue-500">
+                            <span class="text-sm text-slate-700 dark:text-slate-200">Publish landing page with clear ROI tiers</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                        <div id="checklist-bar" class="h-full bg-gradient-to-r from-blue-600 to-emerald-500 transition-all duration-300" style="width: 40%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                <span class="font-heading font-bold text-slate-900 dark:text-white">AppArchGuide</span>
+                <span>•</span>
+                <span>Web vs Desktop Architecture & Freelancer Monetization Guide</span>
+            </div>
+            <button id="footer-copy-btn" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition-colors">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                Copy Complete Single-File HTML
+            </button>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE APPLICATION LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            // 1. Custom Non-Blocking Toast Notification (Never use alert())
+            function showToast(message, type = 'success') {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                const bgClass = type === 'success' 
+                    ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-700 dark:border-slate-200' 
+                    : 'bg-rose-600 text-white border-rose-500';
+                
+                toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-2xl shadow-xl border text-sm font-medium transform translate-y-2 opacity-0 transition-all duration-300 ${bgClass}`;
+                toast.innerHTML = `
+                    <svg class="w-4 h-4 text-emerald-400 dark:text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>${message}</span>
+                `;
+                container.appendChild(toast);
+
+                // Animate in
+                requestAnimationFrame(() => {
+                    toast.classList.remove('translate-y-2', 'opacity-0');
+                });
+
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    toast.classList.add('translate-y-2', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            // 2. Dark / Light Mode Toggle with Persistence
+            const htmlEl = document.documentElement;
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            
+            const savedTheme = localStorage.getItem('apparch-theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlEl.classList.add('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                htmlEl.classList.toggle('dark');
+                const isDark = htmlEl.classList.contains('dark');
+                localStorage.setItem('apparch-theme', isDark ? 'dark' : 'light');
+                showToast(isDark ? 'Switched to Dark Mode' : 'Switched to Light Mode');
+            });
+
+            // 3. Copy Complete HTML Source Code (Using execCommand fallback for iFrame safety)
+            function copyFullHtmlCode() {
+                try {
+                    const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+                    const textarea = document.createElement('textarea');
+                    textarea.value = fullHtml;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textarea);
+
+                    if (successful) {
+                        showToast('Complete HTML code copied to clipboard!');
+                    } else {
+                        showToast('Unable to copy automatically. Please select code manually.', 'error');
+                    }
+                } catch (err) {
+                    showToast('Copy failed. Please try again.', 'error');
+                }
+            }
+
+            document.getElementById('copy-html-btn').addEventListener('click', copyFullHtmlCode);
+            document.getElementById('footer-copy-btn').addEventListener('click', copyFullHtmlCode);
+
+            // 4. Live Comparison Table Filter
+            const tableSearchInput = document.getElementById('table-search');
+            const tableRows = document.querySelectorAll('#comparison-table tbody tr');
+
+            tableSearchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                tableRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(query) ? '' : 'none';
+                });
+            });
+
+            // 5. Interactive Pros & Cons View Tabs
+            const tabBtns = document.querySelectorAll('.pros-tab-btn');
+            const prosGrid = document.getElementById('pros-cons-grid');
+            const webProsCard = document.getElementById('web-pros-card');
+            const desktopProsCard = document.getElementById('desktop-pros-card');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Reset button styles
+                    tabBtns.forEach(b => {
+                        b.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-900', 'dark:text-white', 'shadow-sm');
+                        b.classList.add('text-slate-600', 'dark:text-slate-400');
+                    });
+                    // Active button style
+                    btn.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-900', 'dark:text-white', 'shadow-sm');
+                    btn.classList.remove('text-slate-600', 'dark:text-slate-400');
+
+                    const view = btn.getAttribute('data-tab');
+                    if (view === 'both') {
+                        prosGrid.classList.remove('max-w-3xl', 'mx-auto', 'lg:grid-cols-1');
+                        prosGrid.classList.add('lg:grid-cols-2');
+                        webProsCard.classList.remove('hidden');
+                        desktopProsCard.classList.remove('hidden');
+                    } else if (view === 'web') {
+                        prosGrid.classList.remove('lg:grid-cols-2');
+                        prosGrid.classList.add('max-w-3xl', 'mx-auto', 'lg:grid-cols-1');
+                        webProsCard.classList.remove('hidden');
+                        desktopProsCard.classList.add('hidden');
+                    } else if (view === 'desktop') {
+                        prosGrid.classList.remove('lg:grid-cols-2');
+                        prosGrid.classList.add('max-w-3xl', 'mx-auto', 'lg:grid-cols-1');
+                        desktopProsCard.classList.remove('hidden');
+                        webProsCard.classList.add('hidden');
+                    }
+                });
+            });
+
+            // 6. Freelancer ROI & Revenue Estimator Logic
+            let calcMode = 'web'; // 'web' or 'desktop'
+            const modeWebBtn = document.getElementById('calc-mode-web');
+            const modeDesktopBtn = document.getElementById('calc-mode-desktop');
+            
+            const clientsSlider = document.getElementById('clients-slider');
+            const priceSlider = document.getElementById('price-slider');
+            const costSlider = document.getElementById('cost-slider');
+
+            const clientsLabel = document.getElementById('clients-label');
+            const priceLabel = document.getElementById('price-label');
+            const costLabel = document.getElementById('cost-label');
+
+            const clientsVal = document.getElementById('clients-val');
+            const priceVal = document.getElementById('price-val');
+            const costVal = document.getElementById('cost-val');
+
+            const metric1Title = document.getElementById('metric-1-title');
+            const metric1Val = document.getElementById('metric-1-val');
+            const metric2Val = document.getElementById('metric-2-val');
+            const metric3Val = document.getElementById('metric-3-val');
+
+            function updateCalculator() {
+                const count = parseInt(clientsSlider.value, 10);
+                const price = parseInt(priceSlider.value, 10);
+                const overhead = parseInt(costSlider.value, 10);
+
+                if (calcMode === 'web') {
+                    clientsVal.textContent = `${count} subscribers`;
+                    priceVal.textContent = `$${price} / mo`;
+                    costVal.textContent = `$${overhead} / mo`;
+
+                    const monthlyGross = count * price;
+                    const monthlyNet = Math.max(0, monthlyGross - overhead);
+                    const yearlyNet = monthlyNet * 12;
+                    const margin = monthlyGross > 0 ? Math.round((monthlyNet / monthlyGross) * 100) : 0;
+
+                    metric1Title.textContent = 'Monthly Net Profit';
+                    metric1Val.textContent = `$${monthlyNet.toLocaleString()}`;
+                    metric2Val.textContent = `$${yearlyNet.toLocaleString()}`;
+                    metric3Val.textContent = `${margin}%`;
+                } else {
+                    clientsVal.textContent = `${count} licenses`;
+                    priceVal.textContent = `$${price} / license`;
+                    costVal.textContent = `$${overhead} / mo`;
+
+                    // Assume 'count' licenses sold over the year + 20% annual renewal equivalent
+                    const annualGross = count * price;
+                    const annualCost = overhead * 12;
+                    const yearlyNet = Math.max(0, annualGross - annualCost);
+                    const avgMonthlyNet = Math.round(yearlyNet / 12);
+                    const margin = annualGross > 0 ? Math.round((yearlyNet / annualGross) * 100) : 0;
+
+                    metric1Title.textContent = 'Avg. Monthly Net';
+                    metric1Val.textContent = `$${avgMonthlyNet.toLocaleString()}`;
+                    metric2Val.textContent = `$${yearlyNet.toLocaleString()}`;
+                    metric3Val.textContent = `${margin}%`;
+                }
+            }
+
+            modeWebBtn.addEventListener('click', () => {
+                calcMode = 'web';
+                modeWebBtn.className = 'calc-mode-btn p-3.5 rounded-2xl border border-blue-500 bg-blue-600/20 text-left transition-all';
+                modeDesktopBtn.className = 'calc-mode-btn p-3.5 rounded-2xl border border-slate-700 bg-slate-800/50 text-left hover:border-purple-500 transition-all';
+                
+                clientsLabel.textContent = 'Active Paying Clients / Subscribers';
+                priceLabel.textContent = 'Monthly Subscription Price ($)';
+                costLabel.textContent = 'Monthly Cloud / Hosting Overhead ($)';
+                priceSlider.value = 49;
+                costSlider.value = 60;
+                updateCalculator();
+            });
+
+            modeDesktopBtn.addEventListener('click', () => {
+                calcMode = 'desktop';
+                modeDesktopBtn.className = 'calc-mode-btn p-3.5 rounded-2xl border border-purple-500 bg-purple-600/20 text-left transition-all';
+                modeWebBtn.className = 'calc-mode-btn p-3.5 rounded-2xl border border-slate-700 bg-slate-800/50 text-left hover:border-blue-500 transition-all';
+                
+                clientsLabel.textContent = 'Desktop Licenses Sold (Per Year)';
+                priceLabel.textContent = 'One-Time License Price ($)';
+                costLabel.textContent = 'Monthly Ads / Signing Cert Cost ($)';
+                priceSlider.value = 149;
+                costSlider.value = 25;
+                updateCalculator();
+            });
+
+            [clientsSlider, priceSlider, costSlider].forEach(slider => {
+                slider.addEventListener('input', updateCalculator);
+            });
+
+            // 7. Interactive Launch Checklist Progress
+            const checklistItems = document.querySelectorAll('.checklist-item');
+            const checklistProgress = document.getElementById('checklist-progress');
+            const checklistBar = document.getElementById('checklist-bar');
+
+            function updateChecklist() {
+                const total = checklistItems.length;
+                const checked = Array.from(checklistItems).filter(cb => cb.checked).length;
+                const pct = Math.round((checked / total) * 100);
+                checklistProgress.textContent = `${checked} / ${total} Done`;
+                checklistBar.style.width = `${pct}%`;
+            }
+
+            checklistItems.forEach(item => item.addEventListener('change', updateChecklist));
+
+            // Initialize default states
+            updateCalculator();
+            updateChecklist();
+        });
+    </script>
+</body>
+</html>
